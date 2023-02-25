@@ -1,0 +1,22 @@
+{
+  "name": "create-kodim-app",
+  "version": "1.0.0",
+  "description": "Quickly create a scaffolding for various types of JavaScript projects",
+  "main": "index.js",
+  "author": "Martin Podloucký",
+  "license": "ISC",
+  "bin": {
+    "create-kodim-app": "./index.js"
+  },
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kodim-cz/create-kodim-app"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "cross-spawn": "^7.0.3",
+    "whipapp-core": "0.0.6",
+    "yargs": "^16.2.0"
+  }
+}
