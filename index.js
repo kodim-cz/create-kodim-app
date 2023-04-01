@@ -55,7 +55,7 @@ const argv = yargs(process.argv.slice(2))
     }
 
     await generateApp(result.appRoot, kitPlan);
-    
+
     let packageJsonExists = false
     try {
       await fs.access(path.join(result.appRoot, "package.json"), fs.constants.F_OK);
