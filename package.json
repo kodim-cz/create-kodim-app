@@ -1,6 +1,6 @@
 {
   "name": "create-kodim-app",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Quickly create a scaffolding for various types of JavaScript projects",
   "main": "index.js",
   "author": "Martin Podloucký",
