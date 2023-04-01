@@ -29,7 +29,13 @@ const argv = yargs(process.argv.slice(2))
         default: DEFAULT_SERVER_URL,
         describe: 'URL from where to fetch the kit files',
         type: 'string'
-    })
+      })
+      .option('e', {
+        alias: 'vscode',
+        default: false,
+        describe: 'Open created project in VS Code',
+        type: 'boolean'
+      })
   }).help().argv;
 
 (async () => {
@@ -48,11 +54,16 @@ const argv = yargs(process.argv.slice(2))
     }
 
     await generateApp(result.appRoot, kitPlan);
-  
+
     console.info('Installing NPM dependencies:');
     spawnSync('npm', ['install'], { cwd: result.appRoot, stdio: 'inherit' });
 
     console.info(chalk.green(`Project '${argv.app_name}' created successfully.`));
+
+    if (argv.vscode) {
+      console.info(chalk.green(`Opening '${argv.app_name}' in VS Code.`));
+      spawnSync('code', ['.'], { cwd: result.appRoot, stdio: 'inherit' })
+    }
   } catch (error) {
     console.error(chalk.redBright(`ERROR: ${error.message}`));
   }
