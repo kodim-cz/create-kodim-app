@@ -2,6 +2,7 @@
 
 'use strict';
 
+const fs = require('fs').promises;
 const path = require('path');
 const chalk = require('chalk');
 const spawnSync = require('cross-spawn').sync;
@@ -55,8 +56,18 @@ const argv = yargs(process.argv.slice(2))
 
     await generateApp(result.appRoot, kitPlan);
 
-    console.info('Installing NPM dependencies:');
-    spawnSync('npm', ['install'], { cwd: result.appRoot, stdio: 'inherit' });
+    let packageJsonExists = false
+    try {
+      await fs.access(path.join(result.appRoot, "package.json"), fs.constants.F_OK);
+      packageJsonExists = true
+    } catch {
+      // package.json doesn't exist in kit - it is OK, we just don't run npm install
+    }
+
+    if (packageJsonExists) {
+      console.info('Installing NPM dependencies:');
+      spawnSync('npm', ['install'], { cwd: result.appRoot, stdio: 'inherit' });
+    }
 
     console.info(chalk.green(`Project '${argv.app_name}' created successfully.`));
 
